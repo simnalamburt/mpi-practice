@@ -1,12 +1,27 @@
+#include <iostream>
 #include "mpi.h"
-#include <stdio.h>
+
+class mpi {
+  int _rank, _size;
+public:
+  mpi(int &argc, char **&argv) {
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &_rank);
+  }
+
+  ~mpi() {
+    MPI_Finalize();
+  }
+
+  int rank() const { return _rank; }
+  int size() const { return _size; }
+};
 
 int main(int argc, char **argv) {
-  int rank, size;
-  MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  printf("Hello, I am %d of %d\n", rank, size);
-  MPI_Finalize();
+  using namespace std;
+
+  const mpi mpi(argc, argv);
+  cout << "Hello, I am " << mpi.rank() << " of " << mpi.size() << endl;
   return 0;
 }
