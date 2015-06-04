@@ -1,6 +1,6 @@
-OpenMP Practice
+MPI Practice
 ========
-Dead-simple OpenMP Practice
+Dead-simple MPI Practice
 ```sh
 make
 make run
