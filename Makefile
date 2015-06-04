@@ -1,5 +1,5 @@
-all: main.c
-	mpicc $^ -o bin
+all: main.cc
+	mpic++ $^ -o bin
 
 run:
 	mpirun -n 4 ./bin
